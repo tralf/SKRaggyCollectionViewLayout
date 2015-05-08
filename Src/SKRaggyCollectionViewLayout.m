@@ -14,7 +14,7 @@
 @property (nonatomic, strong) NSMutableArray *edgeXPositions;
 
 // Method to get the farthest X-coordinate among all rows
-@property (nonatomic, readonly) float edgeX;
+@property (nonatomic, readonly) CGFloat edgeX;
 
 // Cached attributes, were returned with layoutAttributesForElementsInRect: method last time
 @property (nonatomic, strong) NSMutableArray* previousLayoutAttributes;
@@ -71,8 +71,8 @@
     [self flushEdgeXPositions];
 }
 
-- (float)edgeX {
-    float x = 0;
+- (CGFloat)edgeX {
+    CGFloat x = 0;
     for (NSNumber *f in self.edgeXPositions) {
         if ([f floatValue] > x) x = [f floatValue];
     }
@@ -165,9 +165,9 @@
     
 // Find X-coordinate and a row which are the closest to the collection left corner. A cell for this path should be placed here.
     int currentRow = 0;
-    float currentX = MAXFLOAT;
+    CGFloat currentX = MAXFLOAT;
     for (int i = 0; i < self.edgeXPositions.count; i++) {
-        float x = [[self.edgeXPositions objectAtIndex:i] floatValue];
+        CGFloat x = [[self.edgeXPositions objectAtIndex:i] floatValue];
         if (x < currentX) {
             currentRow = i;
             currentX = x;
@@ -175,17 +175,17 @@
     }
 // Calculate cell frame values based on collection height, current row, currentX, the number of rows and delegate's preferredWidthForItemAtIndexPath: value
 // If variableFrontierHeight is YES this value will be adjusted for the first and last rows
-    float maxH = self.collectionView.frame.size.height;
-    float rowMaxH = maxH / self.numberOfRows;
-    float x = currentX;
-    float y = rowMaxH * currentRow;
-    float w = [self.delegate collectionLayout:self preferredWidthForItemAtIndexPath:path];
-    float h = self.collectionView.frame.size.height / self.numberOfRows;
-    float newH = h;
+    CGFloat maxH = self.collectionView.frame.size.height;
+    CGFloat rowMaxH = maxH / self.numberOfRows;
+    CGFloat x = currentX;
+    CGFloat y = rowMaxH * currentRow;
+    CGFloat w = [self.delegate collectionLayout:self preferredWidthForItemAtIndexPath:path];
+    CGFloat h = self.collectionView.frame.size.height / self.numberOfRows;
+    CGFloat newH = h;
 // Adjust height of the frame if we need raggy style
     if (self.variableFrontierHeight) {
         if (currentRow == 0) {
-            float space = arc4random() % self.randomFirstRowVar;
+            CGFloat space = arc4random() % self.randomFirstRowVar;
             if (self.prevWasTallFirst) {
                 space += self.fixedFirstRowVar;
             }
@@ -193,7 +193,7 @@
             y += space;
             newH -= space;
         } else if (currentRow == self.numberOfRows - 1) {
-            float space = arc4random() % self.randomLastRowVar;
+            CGFloat space = arc4random() % self.randomLastRowVar;
             if (self.prevWasTallLast) {
                 space += self.fixedLastRowVar;
             }
