@@ -43,12 +43,12 @@ static NSString *cellIdentifier = @"cell";
 - (UICollectionViewCell *)collectionView:(UICollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     UICollectionViewCell *cell = [collectionView dequeueReusableCellWithReuseIdentifier:cellIdentifier forIndexPath:indexPath];
 // create random cell color to make epileptics happy
-    float r = arc4random() % 250;
-    float g = arc4random() % 250;
-    float b = arc4random() % 250;
+    CGFloat r = arc4random() % 250;
+    CGFloat g = arc4random() % 250;
+    CGFloat b = arc4random() % 250;
     cell.backgroundColor = [UIColor colorWithRed:r/255.f green:g/255.f blue:b/255.f alpha:1.f];
     UILabel *l = (UILabel*)[cell viewWithTag:2];
-    l.text = [NSString stringWithFormat:@"%d", indexPath.row];
+    l.text = [NSString stringWithFormat:@"%ld", (long)indexPath.row];
     return cell;
 }
 
@@ -58,8 +58,8 @@ static NSString *cellIdentifier = @"cell";
 
 #pragma mark – SKCollectionLayoutDelegate
 
-- (float)collectionLayout:(SKRaggyCollectionViewLayout*)layout preferredWidthForItemAtIndexPath:(NSIndexPath *)indexPath {
-    float width = arc4random() % 400 + 100.f;
+- (CGFloat)collectionLayout:(SKRaggyCollectionViewLayout*)layout preferredWidthForItemAtIndexPath:(NSIndexPath *)indexPath {
+    CGFloat width = arc4random() % 400 + 100.f;
     return width;
 }
 

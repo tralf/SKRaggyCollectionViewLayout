@@ -12,7 +12,7 @@
 
 // Layout should know preferred width for element only, because its height would be calculated based on number of rows and collecton view height
 
-- (float)collectionLayout:(SKRaggyCollectionViewLayout*)layout preferredWidthForItemAtIndexPath:(NSIndexPath *)indexPath;
+- (CGFloat)collectionLayout:(SKRaggyCollectionViewLayout*)layout preferredWidthForItemAtIndexPath:(NSIndexPath *)indexPath;
 
 @optional
 
